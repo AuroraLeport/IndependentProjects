@@ -109,9 +109,9 @@ xgb was chosen because <br />
     a weight can be added to xgb to balance a highly imballanced dataset. <br /> 
     
  Tree-structured Parzen Estimator hyperopt was chosen because <br /> 
- ###### [Hyperopt Documentation] (http://hyperopt.github.io/hyperopt/) <br />
      it optimizes hyperparameter combinations and tries only those values which give the best results ignoring others. <br />
      less time is needed to explore the paramater space vs randomized grid search. <br />
+     ###### [Hyperopt Documentation] (http://hyperopt.github.io/hyperopt/) <br />
     
 ## Advice for how to use the model for decision making to achieve the business objective <a name="advice"></a>
 ------------
