@@ -87,8 +87,6 @@ candidate.
     # i.e. if a candidate does not have a record of donation, this model assumes they donated amount = 0. It does not assume their donation history is null.
     # date of prediction = '2016-08-01'. Anything donated after is a future donation anything prior is a historical donation.
     
-    
-
 
 ## Explanation of model algorithm choice.
 ------------
@@ -96,7 +94,7 @@ candidate.
 
 xgb was chosen because
     features are right skewed. Tree based algos can handle this.
-    features are more interpretable when unscaled. It takes less effort to leave them as is rather than scale them, then scale them back. xgb does not require scaling.
+    features are more interpretable when they are not transformed. It takes less effort to leave them as is rather than have to scale/transform them and then scale them back for interpretablility. tree based methods do not require transformation/scaling.
     the problem space is non-linear. A tree based approach is therefore appropriate.
     a weight can be added to xgb to balance a highly imballanced dataset.   
     
