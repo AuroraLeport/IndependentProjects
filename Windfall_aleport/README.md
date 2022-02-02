@@ -127,7 +127,7 @@ xgb was chosen because <br />
     
     lift charts: if the client can reach 10 percent of donors they will find x 8.6 as many ideal donors with the model as at random selection. 
 
-    Precision at ~count ideal candidates:
+    Precision using model at the number of ideal candidates typically found in 5 year period:
     model :  if 119 are contacted, 65 are found
     chance:  if 119 are contacted, 0 are found
     
