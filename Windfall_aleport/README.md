@@ -122,14 +122,14 @@ xgb was chosen because <br />
     distribution of propensity across ideal and non-ideal donors <br />
     distribution of propensity across ideal Classes (checking for bias towards one class or another) <br />
     
-    This model can be used to predict the likelyhood of a donor to become an "ideal donor" in the next 5 years. <br />
-    It is based off of members with a 5 year donor history. <br />
+    This model can be used to predict the likelyhood of a donor to become an "ideal donor" in the next 5 years. 
+    It is based off of members with a 5 year donor history. 
     
-    lift charts: if the client can reach 10 percent of donors they will find x 8.6 as many ideal donors with the model as at random selection. <br />
+    lift charts: if the client can reach 10 percent of donors they will find x 8.6 as many ideal donors with the model as at random selection. 
 
     Precision at ~count ideal candidates:
     model :  if 119 are contacted, 65 are found
-    chance:  if 119 are contacted, 0 are found <br />
+    chance:  if 119 are contacted, 0 are found
     
     there are very few donors of Class A. If we are trying to predict Class A donors as ideal or not ideal, this may not be the model to do it! 
 
