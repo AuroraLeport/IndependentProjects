@@ -1,6 +1,6 @@
 ### Table of Contents
 
-1. [Introduction](#introduction)
+1. [Installation](#installation)
 2. [Project Organization](#ProjectOrganization)
 3. [Summary of preprocessing, feature engineering](#summary)
 4. [Explanation of model algorithm choice](#modelchoice)
@@ -12,8 +12,6 @@ CREATOR: Aurora Leport <br />
 DATE: 2/1/2022 <br />
 PURPOSE: Modeling donors with past 5 years of donor history that will or will not become an ideal donor. <br />
          (ideal = donate >= $20,000 in next 5 years). <br />
-
-/******************
 
 ## Installation <a name="installation"></a>
 
