@@ -4,7 +4,7 @@
 2. [Project Organization](#ProjectOrganization)
 3. [Summary: data exploration](#summary)
 4. [Summary: model creation](#modelchoice)
-5. [Advice on model usage](#advice)
+5. [Advice for model usage](#advice)
 
 Introduction
 ------------
