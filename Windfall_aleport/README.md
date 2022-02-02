@@ -63,12 +63,12 @@ Install hyperopt from PyPl (pip install hyperopt). <br />
 ------------
 
 1.0-akr-idealdonor-exploration.ipynb --> notebook used for exploration of raw data and feature creation/inclusion. <br />
-    Exploring df_features  <br />
-    Creating features to be used for model creation from df_features <br />
-    Creating features to be used for model creation from df_donations <br />
+    * Exploring df_features  <br />
+    * Creating features to be used for model creation from df_features <br />
+    * Creating features to be used for model creation from df_donations <br />
 
 Explanation of chosen model parameters --> <br />
-Features used for model creation: <br />
+* Features used for model creation: <br />
        'primaryPropertyValue', <br />
        'propertyCount', <br />
        'NetWorth', <br />
@@ -102,7 +102,7 @@ Things to note: <br />
 ------------
 1.0-akr-idealdonor-model.ipynb --> notebook to implement preprocessing, feature engineering, model creation and predictions.
 
-xgb was chosen because <br />
+* xgb was chosen because <br />
     tree based methods do not require transformation/scaling and can handel non-linear problem spaces. <br />
     features are right skewed. <br />
     features are more interpretable when they are not transformed. <br />
@@ -110,7 +110,7 @@ xgb was chosen because <br />
     the problem space is non-linear. <br />
     a weight can be added to xgb to balance a highly imballanced dataset. <br /> 
     
- Tree-structured Parzen Estimator hyperopt was chosen because <br /> 
+ * Tree-structured Parzen Estimator hyperopt was chosen because <br /> 
      it optimizes hyperparameter combinations and tries only those values which give the best results ignoring others. <br />
      less time is needed to explore the paramater space vs randomized grid search. <br />
      ###### [Hyperopt Documentation] (http://hyperopt.github.io/hyperopt/) <br />
@@ -124,16 +124,16 @@ xgb was chosen because <br />
     distribution of propensity across ideal and non-ideal donors <br />
     distribution of propensity across ideal Classes (checking for bias towards one class or another) <br />
     
-    This model can be used to predict the likelyhood of a donor to become an "ideal donor" in the next 5 years. 
+    * This model can be used to predict the likelyhood of a donor to become an "ideal donor" in the next 5 years. 
     It is based off of members with a 5 year donor history. 
     
-    lift charts: if the client can reach 10 percent of donors they will find x 8.6 as many ideal donors with the model as at random selection. 
+    * lift charts: if the client can reach 10 percent of donors they will find x 8.6 as many ideal donors with the model as at random selection. 
 
-    Precision using model at the number of ideal candidates typically found in 5 year period:
+    * Precision using model at the number of ideal candidates typically found in 5 year period:
     model :  if 119 are contacted, 65 are found
     chance:  if 119 are contacted, 0 are found
     
-    there are very few donors of Class A. If we are trying to predict Class A donors as ideal or not ideal, this may not be the model to do it! 
+    * There are very few donors of Class A. If we are trying to predict Class A donors as ideal or not ideal, this may not be the model to do it! 
 
 
 
