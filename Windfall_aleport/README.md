@@ -1,8 +1,8 @@
 ### Table of Contents
 
 1. [Introduction](#introduction)
-2. [Project Organization](#Project Organization)
-3. [Summary of preprocessing, feature engineering](#Summary of data preprocessing and feature engineering)
+2. [Project Organization](#ProjectOrganization)
+3. [Summary of preprocessing, feature engineering](#Summary)
 4. [Advice on how to use results](#advice)
 5. [Licensing, Authors, and Acknowledgements](#licensing)
 
