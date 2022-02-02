@@ -72,13 +72,15 @@ Features used for model creation: <br />
        'primaryPropertyValue', <br />
        'propertyCount', <br />
        'NetWorth', <br />
-       'primaryPropertyLoanToValue_ideal', <br />
+       'primaryPropertyLoanToValue_ideal' : LTV ratio of 80% or less is ideal, <br />
        'primaryPropertyValueToNetWorth_ratio',  <br />
        'LoanAmount', <br />
-       'amount_prev360d2', 'amount_prev360d3',  <br />
-       'amount_prev360d4', <br />
-       'amount_prev360d5', 'count_trans_date_prev5y', <br />
-       'random_value', <br />
+       'amount_prev360d2': amount donated in 2014-2015, <br />
+       'amount_prev360d3': amount donated in 2013-2014,  <br />
+       'amount_prev360d4': amount donated in 2012-2013, <br />
+       'amount_prev360d5': amount donated in 2011-2012, <br />
+       'count_trans_date_prev5y': count donations 2011-Predicted on date, <br />
+       'random_value': baseline for feature importance, <br />
        'amountscaled_prev360d3',  <br />
        'amountscaled_prev360d5' <br />
 Any features eliminated from df_features was done so because there was minimal correlation with the amount donated between '2016-08-01' and '2021-07-31'. <br />
