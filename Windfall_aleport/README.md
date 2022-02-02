@@ -2,18 +2,16 @@ Introduction
 ------------
 CREATOR: AURORA LEPORT <br />
 DATE: 2/1/2022 <br />
-PURPOSE: Modeling donors with past 5 years of donor history that will or will not become an ideal donor (ideal = donate >= $20,000 in next 5 years). <br />
-
-date of prediction for model creation (aka PredictedOn) = '2016-08-01'. Any donations after is a future donation any donoation prior is a historical donation. 
-This model is limited to donoations in historical 5 years.
+PURPOSE: Modeling donors with past 5 years of donor history that will or will not become an ideal donor. <br />
+         (ideal = donate >= $20,000 in next 5 years). <br />
 
 /******************
 
 ## Installation
 
-The Anaconda distribution of Python is required.  
-The code should run with no issues using Python versions 3.8.
-Install hyperopt from PyPl (pip install hyperopt).
+The Anaconda distribution of Python is required.  <br />
+The code should run with no issues using Python versions 3.8. <br />
+Install hyperopt from PyPl (pip install hyperopt). <br />
 
  ## Project Organization
 ------------
@@ -58,10 +56,14 @@ Install hyperopt from PyPl (pip install hyperopt).
 ## Summary of data preprocessing and feature engineering
 ------------
 
-1.0-akr-idealdonor-exploration.ipynb --> notebook exploring raw data.
-    Exploring df_features 
-    Creating features to be used for model creation from df_features
-    Creating features to be used for model creation from df_donations
+1.0-akr-idealdonor-exploration.ipynb --> notebook exploring raw data. <br />
+    Exploring df_features  <br />
+    Creating features to be used for model creation from df_features <br />
+    Creating features to be used for model creation from df_donations <br />
+
+date of prediction for model creation (aka PredictedOn) = '2016-08-01'. <br />
+any donations after PredictedOn is a future donation any donoation prior to PredictedOn is a historical donation. <br />
+this model is limited to donoations in historical 5 years.
 
 Explanation of chosen model parameters -->
 Features used for model creation:
