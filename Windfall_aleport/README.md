@@ -61,34 +61,34 @@ Install hyperopt from PyPl (pip install hyperopt). <br />
     Creating features to be used for model creation from df_features <br />
     Creating features to be used for model creation from df_donations <br />
 
-date of prediction for model creation (aka PredictedOn) = '2016-08-01'. <br />
-any donations after PredictedOn is a future donation any donoation prior to PredictedOn is a historical donation. <br />
-this model is limited to donoations in historical 5 years.
-
-Explanation of chosen model parameters -->
-Features used for model creation:
-       'primaryPropertyValue', 
-       'propertyCount', 
-       'NetWorth',
-       'primaryPropertyLoanToValue_ideal',
-       'primaryPropertyValueToNetWorth_ratio', 
-       'LoanAmount',
-       'amount_prev360d2', 'amount_prev360d3', 
-       'amount_prev360d4',
-       'amount_prev360d5', 'count_trans_date_prev5y', 
-       'random_value',
-       'amountscaled_prev360d3', 
-       'amountscaled_prev360d5' 
-Any features eliminated from df_features was done so because there was minimal correlation with the amount donated between '2016-08-01' and '2021-07-31'. See correlation matrix in 1.0-akr-idealdonor-exploration.ipynb
+Explanation of chosen model parameters --> <br />
+Features used for model creation: <br />
+       'primaryPropertyValue', <br />
+       'propertyCount', <br />
+       'NetWorth', <br />
+       'primaryPropertyLoanToValue_ideal', <br />
+       'primaryPropertyValueToNetWorth_ratio',  <br />
+       'LoanAmount', <br />
+       'amount_prev360d2', 'amount_prev360d3',  <br />
+       'amount_prev360d4', <br />
+       'amount_prev360d5', 'count_trans_date_prev5y', <br />
+       'random_value', <br />
+       'amountscaled_prev360d3',  <br />
+       'amountscaled_prev360d5' <br />
+Any features eliminated from df_features was done so because there was minimal correlation with the amount donated between '2016-08-01' and '2021-07-31'. <br />
+See correlation matrix in 1.0-akr-idealdonor-exploration.ipynb <br />
+As the dataset was pretty small it may have been more beneficial to keep all columns in the dataset. <br />
        
-Things to note:
-    # there are very few donors of class A and may therefore have very little predictive power. The client should be made aware of this if they are interested in predicting donors of 
-Class A. i.e. If we are trying to predict class A donors as ideal or not ideal, this may not be the model to do it! 
-    # as we do not have data on period of time a donor is eligibile, I am making a pretty big assumption that the donations dataset holds **all** the historical donation data of a 
-candidate.
-    # i.e. if a candidate does not have a record of donation, this model assumes they donated amount = 0. It does not assume their donation history is null.
-    # date of prediction = '2016-08-01'. Anything donated after is a future donation anything prior is a historical donation.
-    
+Things to note: <br />
+    --> there are very few donors of class A and may therefore have very little predictive power. <br />
+         The client should be made aware of this if their main interest is to predict ideal donors from donors of Class A. <br />
+         i.e. If we are trying to predict class A donors as ideal or not ideal, this may not be the model to do it! <br />
+    --> as we do not have data on period of time a donor is eligibile, I am making a big assumption that the donations dataset holds **all** the historical donation data of a 
+         candidate. <br />
+         i.e. if a candidate does not have a record of donation, this model assumes they donated amount = 0. It **does not** assume their donation history is null. <br />
+    --> date of prediction for model creation (aka PredictedOn) = '2016-08-01'. <br />
+         any donations after PredictedOn is a future donation any donoation prior to PredictedOn is a historical donation. <br />
+         this model is limited to donoations in historical 5 years.
 
 ## Explanation of model algorithm choice.
 ------------
