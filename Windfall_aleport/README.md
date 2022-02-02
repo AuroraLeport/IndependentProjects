@@ -31,9 +31,7 @@ Install hyperopt from PyPl (pip install hyperopt). <br />
     │   │
     │   └── raw            <- raw data
     │       │
-    │       ├── donations.csv
-    │       ├── major_donor_labels.csv
-    │       └── windfall_features.csv
+    │       └── windfall_ds_challenge.zip
     │
     ├── models             <- Trained and serialized model.
     │
