@@ -1,8 +1,8 @@
 Introduction
 ------------
-CREATOR: AURORA LEPORT
-DATE: 2/1/2022
-PURPOSE: Modeling donors with past 5 years of donor history that will or will not become an ideal donor (ideal = donate >= $20,000 in next 5 years).
+CREATOR: AURORA LEPORT <br />
+DATE: 2/1/2022 <br />
+PURPOSE: Modeling donors with past 5 years of donor history that will or will not become an ideal donor (ideal = donate >= $20,000 in next 5 years). <br />
 
 date of prediction for model creation (aka PredictedOn) = '2016-08-01'. Any donations after is a future donation any donoation prior is a historical donation. 
 This model is limited to donoations in historical 5 years.
