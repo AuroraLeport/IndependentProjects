@@ -2,26 +2,26 @@
 
 1. [Introduction](#introduction)
 2. [Project Organization](#ProjectOrganization)
-3. [Summary of preprocessing, feature engineering](#Summary)
-4. [Advice on how to use results](#advice)
-5. [Licensing, Authors, and Acknowledgements](#licensing)
+3. [Summary of preprocessing, feature engineering](#summary)
+4. [Explanation of model algorithm choice](#modelchoice)
+5. [Advice on usage](#advice)
 
 Introduction
 ------------
-CREATOR: AURORA LEPORT <br />
+CREATOR: Aurora Leport <br />
 DATE: 2/1/2022 <br />
 PURPOSE: Modeling donors with past 5 years of donor history that will or will not become an ideal donor. <br />
          (ideal = donate >= $20,000 in next 5 years). <br />
 
 /******************
 
-## Installation
+## Installation <a name="installation"></a>
 
 The Anaconda distribution of Python is required.  <br />
 The code should run with no issues using Python versions 3.8. <br />
 Install hyperopt from PyPl (pip install hyperopt). <br />
 
- ## Project Organization
+ ## Project Organization<a name="ProjectOrganization"></a>
 ------------
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
@@ -61,7 +61,7 @@ Install hyperopt from PyPl (pip install hyperopt). <br />
             └── __init__.py           <- Makes visualization a Python module
 
 
-## Summary of data preprocessing and feature engineering
+## Summary of data preprocessing and feature engineering <a name="summary"></a>
 ------------
 
 1.0-akr-idealdonor-exploration.ipynb --> notebook exploring raw data. <br />
@@ -98,7 +98,7 @@ Things to note: <br />
          any donations after PredictedOn is a future donation any donoation prior to PredictedOn is a historical donation. <br />
          this model is limited to donoations in historical 5 years.
 
-## Explanation of model algorithm choice.
+## Explanation of model algorithm choice. <a name="modelchoice"></a>
 ------------
 1.0-akr-idealdonor-model.ipynb --> notebook to implement preprocessing, feature engineering, model creation and predictions.
 
@@ -121,7 +121,7 @@ xgb was chosen because
     distribution of propensity across ideal and non-ideal donors
     distribution of propensity across ideal Classes (checking for bias towards one class or another)
     
-## Advice for how to use the model for decision making to achieve the business objective
+## Advice for how to use the model for decision making to achieve the business objective <a name="advice"></a>
 ------------
     This model can be used to predict the likelyhood of a donor to become an "ideal donor" in the next 5 years. 
     
