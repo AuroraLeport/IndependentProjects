@@ -1,3 +1,11 @@
+### Table of Contents
+
+1. [Introduction](#introduction)
+2. [Project Organization](#projectorganization)
+3. [Summary of preprocessing, feature engineering](#summary)
+4. [Advice on how to use results](#advice)
+5. [Licensing, Authors, and Acknowledgements](#licensing)
+
 Introduction
 ------------
 CREATOR: AURORA LEPORT <br />
