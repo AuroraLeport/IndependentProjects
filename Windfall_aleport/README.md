@@ -2,9 +2,9 @@
 
 1. [Installation](#installation)
 2. [Project Organization](#ProjectOrganization)
-3. [Summary of preprocessing, feature engineering](#summary)
-4. [Explanation of model algorithm choice](#modelchoice)
-5. [Advice on usage](#advice)
+3. [Summary: data exploration](#summary)
+4. [Summary: model creation](#modelchoice)
+5. [Advice on model usage](#advice)
 
 Introduction
 ------------
@@ -59,10 +59,10 @@ Install hyperopt from PyPl (pip install hyperopt). <br />
             └── __init__.py           <- Makes visualization a Python module
 
 
-## Summary of data preprocessing and feature engineering <a name="summary"></a>
+## Summary: data exploration  <a name="summary"></a>
 ------------
 
-1.0-akr-idealdonor-exploration.ipynb --> notebook exploring raw data. <br />
+1.0-akr-idealdonor-exploration.ipynb --> notebook used for exploration of raw data and feature creation/inclusion. <br />
     Exploring df_features  <br />
     Creating features to be used for model creation from df_features <br />
     Creating features to be used for model creation from df_donations <br />
@@ -98,7 +98,7 @@ Things to note: <br />
          any donations after PredictedOn is a future donation any donoation prior to PredictedOn is a historical donation. <br />
          this model is limited to donoations in historical 5 years.
 
-## Explanation of model algorithm choice. <a name="modelchoice"></a>
+## Summary: preprocessing, feature engineering, model creation (and explanation of algorithm choice). <a name="modelchoice"></a>
 ------------
 1.0-akr-idealdonor-model.ipynb --> notebook to implement preprocessing, feature engineering, model creation and predictions.
 
