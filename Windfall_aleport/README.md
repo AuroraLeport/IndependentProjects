@@ -31,9 +31,7 @@ Install hyperopt from PyPl (pip install hyperopt). <br />
     │   │
     │   └── raw            <- raw data
     │       │
-    │       ├── donations.csv
-    │       ├── major_donor_labels.csv
-    │       └── windfall_features.csv
+    │       └── windfall_ds_challenge.zip
     │
     ├── models             <- Trained and serialized model.
     │
@@ -129,9 +127,9 @@ Things to note: <br />
     
     * lift charts: if the client can reach 10 percent of donors they will find x 8.6 as many ideal donors with the model as at random selection. 
 
-    * Precision using model at the number of ideal candidates typically found in 5 year period:
-    model :  if 119 are contacted, 65 are found
-    chance:  if 119 are contacted, 0 are found
+    * Precision (described here at the number of ideal candidates in test set):
+    with model :  if 119 are contacted, 65 are found
+    at chance:  if 119 are contacted, 0 are found
     
     * There are very few donors of Class A. If we are trying to predict Class A donors as ideal or not ideal, this may not be the model to do it! 
 
