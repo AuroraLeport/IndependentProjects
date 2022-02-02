@@ -100,39 +100,38 @@ Things to note: <br />
 ------------
 1.0-akr-idealdonor-model.ipynb --> notebook to implement preprocessing, feature engineering, model creation and predictions.
 
-xgb was chosen because
-    features are right skewed. Tree based algos can handle this.
-    features are more interpretable when they are not transformed. It takes less effort to leave them as is rather than have to scale/transform them and then scale them back for interpretablility. tree based methods do not require transformation/scaling.
-    the problem space is non-linear. A tree based approach is therefore appropriate.
-    a weight can be added to xgb to balance a highly imballanced dataset.   
+xgb was chosen because <br />
+    tree based methods do not require transformation/scaling and can handel non-linear problem spaces. <br />
+    features are right skewed. <br />
+    features are more interpretable when they are not transformed. <br />
+    It takes less effort to leave them as is rather than have to scale/transform them and then scale them back for interpretablility. <br />
+    the problem space is non-linear. <br />
+    a weight can be added to xgb to balance a highly imballanced dataset. <br /> 
     
- Tree-structured Parzen Estimator hyperopt was chosen because
-     it optimizes hyperparameter combinations and tries only those values which give the best results ignoring others.
-     less time is needed to explore the paramater space vs randomized grid search.
-
-###### [Hyperopt Documentation] (http://hyperopt.github.io/hyperopt/)
-
-1.0-akr-idealdonor-metricsviz.ipynb --> metrics and figures of model performance
-    cumulative gains and lift charts
-    auc roc and auc precision/recall
-    confusion matrix
-    distribution of propensity across ideal and non-ideal donors
-    distribution of propensity across ideal Classes (checking for bias towards one class or another)
+ Tree-structured Parzen Estimator hyperopt was chosen because <br /> 
+ ###### [Hyperopt Documentation] (http://hyperopt.github.io/hyperopt/) <br />
+     it optimizes hyperparameter combinations and tries only those values which give the best results ignoring others. <br />
+     less time is needed to explore the paramater space vs randomized grid search. <br />
     
 ## Advice for how to use the model for decision making to achieve the business objective <a name="advice"></a>
 ------------
-    This model can be used to predict the likelyhood of a donor to become an "ideal donor" in the next 5 years. 
+1.0-akr-idealdonor-metricsviz.ipynb --> metrics and figures of model performance <br />
+    cumulative gains and lift charts <br />
+    auc roc and auc precision/recall <br />
+    confusion matrix <br />
+    distribution of propensity across ideal and non-ideal donors <br />
+    distribution of propensity across ideal Classes (checking for bias towards one class or another) <br />
     
-    It is based off of members with a 5 year donor history. 
+    This model can be used to predict the likelyhood of a donor to become an "ideal donor" in the next 5 years. <br />
+    It is based off of members with a 5 year donor history. <br />
     
-    lift charts: if the client can reach 10 percent of donors they will find x 8.6 as many ideal donors with the model as at random selection.
-    
+    lift charts: if the client can reach 10 percent of donors they will find x 8.6 as many ideal donors with the model as at random selection. <br />
+
     Precision at ~count ideal candidates:
     model :  if 119 are contacted, 65 are found
-    chance:  if 119 are contacted, 0 are found 
+    chance:  if 119 are contacted, 0 are found <br />
     
-    there are very few donors of Class A. Class A may have very little predictive power. The client should be made aware of this if they are specifcially interested in
-    predicting donors of Class A. i.e. If we are trying to predict Class A donors as ideal or not ideal, this may not be the model to do it! 
+    there are very few donors of Class A. If we are trying to predict Class A donors as ideal or not ideal, this may not be the model to do it! 
 
 
 
