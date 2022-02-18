@@ -1,0 +1,88 @@
+Several measures of adherence to multiple medications (polypharmacy) have been reported in the literature as averaged metrics from single 
+medications. Because they are historical and were not developed to estimate polypharmacy, the formulae represent a gross approximation of the 
+actual medication intake and were therefore criticized. 
+
+ study comparing different calculation methods showed that the use of MPR for more
+than one medication overestimates adherence, predominantly due to the presence of duplication [4]. Since the
+‘‘average MPR’’ does not account for the number of
+medications, the frequency of medication switching, the
+duplication, the overlapping, or the unexpected and sameday refills, it can hardly reflect the actual adherence that it
+was intended to measure. Thus, MPR methods are inadequate for quantifying adherence to polypharmacy
+regimens.
+
+daily polypharmacy possession ratio DPPR is a more robust method of measuring adherence than the traditional 
+medication possession ratio (MPR) MPR methods, as it accounts for oversupply and thus leads to a more sound measure if the assumption for dose is incorrect.
+This index considers the presence or absence of multiple medications on each day in the
+observation period. It quantifies polypharmacy adherence as the percentage of medications daily available. This
+approach accounts for the specificity of polypharmacy such as the number of medications and frequency of medication switching. It also eliminates duplication and overlapping,
+the parameters responsible for the general overestimation of adherence.
+
+Hence, the DPPR accounts for oversupply solely to compensate a subsequent gap (timeforward-approach),
+and excludes oversupply beyond the end date which was shown to overestimate adherence measures by 
+enlarging the value of the quantity dispensed. This is a disadvantage of the MPR methods because they count 
+oversupplies and can lead to extreme outliers relative to the DPPR. However, because standardization of all variables 
+is an integral part of the DPPR measure, it delivers a more realistic value of medication use and can be used in adherence research and for policy makers
+
+What is period of time allowed between the end of one prescription and the start of the next?
+Determine the onset of cessation:
+Mathematically, it amounts to setting a specific period of time (or threshold) that needs to be exceeded after the supply from the previous refill 
+ends.
+
+defining end date:
+DATEADD(DAY, DaysSupply-1, ServiceDate) AS ServiceEndDate
+SELECT * FROM #RxServiceClaims WHERE PartyKey = 3268544 ORDER BY PartyKey, AHFSCode, ServiceDate, WrittenDate;
+PartyKey	claimkey	PrescriberID	ServiceDate	ServiceEndDate	WrittenDate	RefillsAuthorizedCount	RefillCode	NDCCode	DrugProductName	AHFSCode	DaysSupply	MetricDecimalQuantity	DailyDosage
+3268544	259794316	1831148063	2018-03-05	2018-03-07	2018-03-05	0	0	50111078810	AZITHROMYCIN	081212	3	3	1
+3268544	259794318	1639178486	2018-03-08	2018-03-21	2018-03-08	0	0	57237004560	CLARITHROMYCIN	081212	14	28	2
+
+ASSUMPTIONS and BIAS
+stockpiling prior to the start date, 
+therapeutic switching and non-persistence, 
+dosage instructions, 
+end date,  
+temporary gaps such as hospitalization, 
+which can be summarized in elements related to the patient, the medication or the system.
+
+Medication switch occurs when a subject initially fills a prescription
+for one product, then at a later point fills a prescription for a different
+product in the same therapeutic class and never refills the first product
+within the observation period. **Ask Alan**
+
+Therapeutic duplication is defined as multiple medication use within the same therapeutic class, and can result from therapeutic augmentation; prescription error must be excluded.
+therapeutic switching and therapeutic duplication should be considered as one medication (no duplication), and changes in dosage should be recognised and accounted for.
+What do we do about overlapping prescriptions? is this what therapeautic duplication stands for? **Ask Alan**
+
+observation period:
+Medication should assumed to be taken continuously throughout observation period. 
+SEE: Operationalization and validation of DPPR ---> Hence, we accounted for oversupply for brand switching but not for therapeutic switching.**Ask Alan**
+
+we treated each initialized medication as if maintained until the end of the observation window. By doing this, we assumed that no treatment 
+interruption or temporary discontinuation occurred during 
+the observation window, thus excluding therapy cessation 
+(so-called non-persistence)
+
+length of the time over which adherence is assessed --
+Setting the start date:
+When does first intake occur? Concern: stockpiling. A look-back period can be included to identify if medication was dispensed previously.
+Adjusting original quantity values with the previous stockpile.
+
+--- whatever comes first between end date of study or end date of last refill
+observation period, i.e., the length of thetime over which adherence is assessed, may start and end at a
+specific fill and refill date; on arbitrary start/stop dates that areset as the index or inventory date and are independent from
+fills and refills; or a combination of a fixed and an arbitrary date.
+
+hospitalization:
+If readmissions are included 
+in the observation window, and the hospitalization period is 
+known, it should be subtracted from the denominator of the 
+metrics, assuming complete adherence to hospital medications during hospital stay.
+
+medicines dispensed implies medicines ingested.
+
+Dosage:
+Not included.
+Calculated via MetricDecimalQuantity  / DaysSupply 
+This may have underestimated usage if a higher dose was prescribed or overestimated the dose if the patient was instructed to 
+take half the dose in the case of tablets that can be cut in half.
+
+
