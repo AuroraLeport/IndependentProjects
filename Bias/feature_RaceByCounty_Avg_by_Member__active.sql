@@ -1,22 +1,22 @@
 /******************* 
 CREATOR: AURORA LEPORT
 DATE: 7/7/2021
-PURPOSE: Creating a probability of race for members for all active participants
+PURPOSE: Creating a probability of race for all active participants
   -- geolocation comes from Datalogy.ds.SVI2018US_to_ZIPTRACT062019_to_FinalMemberAddress_UPDATE__active_360d
-  -- script is first preprocessing in SQL to include columns necessary for R to predict Race
-  -- race probability us calculated in R, RaceFeature_Depression.R, and returns a .csv file
+  -- script is first preprocessed in SQL to include columns necessary for R to predict Race
+  -- race probability is calculated in R, RaceFeature_Depression.R, and returns a .csv file
   -- table is uploaded to SQL with predictions for further preprocessing
-  -- preprocess script is run in sql to get average predicted probability across members with multiple rows and create binary columns
+  -- preprocess script is run in sql to get average predicted probability across members with multiple rows to create binary columns
 
 TABELS USED:
 Datalogy.ds.SVI2018US_to_ZIPTRACT062019_to_FinalMemberAddress_UPDATE__active_360d
 
 see: https://www.policymap.com/maps
-				 Zip
-			/	Tract  \
+			Zip
+		    /	Tract  \
 		   /	Block	\
-		  /		Address  \
-*******************/ 
+		  /	Address  \
+*******************
 
 SELECT COUNT(*) FROM Datalogy.ds.SVI2018US_to_ZIPTRACT062019_to_FinalMemberAddress_UPDATE__active_360d 
 WHERE tract_FIPS IS NULL OR tract_FIPS = 'NA' ---1223
@@ -135,8 +135,8 @@ DROP TABLE IF EXISTS #Cleaned_PredictedRaceCounty_ActiveMembers
 ;
 SELECT 
 DISTINCT
-	 PartyKey
-	,pred_whi
+     PartyKey
+    ,pred_whi
     ,pred_bla
     ,pred_his
     ,pred_asi
