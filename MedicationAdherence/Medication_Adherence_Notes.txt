@@ -30,10 +30,6 @@ ends.
 
 defining end date:
 DATEADD(DAY, DaysSupply-1, ServiceDate) AS ServiceEndDate
-SELECT * FROM #RxServiceClaims WHERE PartyKey = 3268544 ORDER BY PartyKey, AHFSCode, ServiceDate, WrittenDate;
-PartyKey	claimkey	PrescriberID	ServiceDate	ServiceEndDate	WrittenDate	RefillsAuthorizedCount	RefillCode	NDCCode	DrugProductName	AHFSCode	DaysSupply	MetricDecimalQuantity	DailyDosage
-3268544	259794316	1831148063	2018-03-05	2018-03-07	2018-03-05	0	0	50111078810	AZITHROMYCIN	081212	3	3	1
-3268544	259794318	1639178486	2018-03-08	2018-03-21	2018-03-08	0	0	57237004560	CLARITHROMYCIN	081212	14	28	2
 
 ASSUMPTIONS and BIAS
 stockpiling prior to the start date, 
@@ -56,7 +52,7 @@ observation period:
 Medication should assumed to be taken continuously throughout observation period. 
 SEE: Operationalization and validation of DPPR ---> Hence, we accounted for oversupply for brand switching but not for therapeutic switching.**Ask Alan**
 
-we treated each initialized medication as if maintained until the end of the observation window. By doing this, we assumed that no treatment 
+we treated each initialized medication as if maintained until the end of the observation window. By doing this, we assumed that no treatment 
 interruption or temporary discontinuation occurred during 
 the observation window, thus excluding therapy cessation 
 (so-called non-persistence)
