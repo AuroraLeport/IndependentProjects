@@ -1,4 +1,4 @@
-# This file contains functions for loading and preprocessing data.
+# This file module contains a class for loading and preprocessing data.
 import pandas as pd
 import numpy as np
 from datetime import date
