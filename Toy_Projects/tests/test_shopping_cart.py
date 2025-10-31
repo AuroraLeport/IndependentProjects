@@ -1,4 +1,4 @@
-from MyGit.IndependentProjects.Toy_Projects.shopping_cart import ShoppingCart
+from Toy_Projects.shopping_cart import ShoppingCart
 import pytest
 
 
