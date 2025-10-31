@@ -68,44 +68,6 @@ class DataPreprocessing:
         except Exception as e:
             logging.error(f"Error loading data: {e}")
             return None, None, None
-        
-    # def load_data(self):
-    #     """
-    #     Loads the dataset from specified file paths.
-
-    #     Returns:
-    #         tuple: A tuple containing the label, donation and feature DataFrames.
-    #     """
-
-    #     label_df, donation_df, feature_df = None, None, None
-
-    #     try:
-    #         print("Loading data...")
-    #         for file_path in self.file_paths:
-    #             if "label" in file_path:
-    #                 label_df = pd.read_csv(file_path)
-    #                 label_df = label_df.rename(
-    #                     columns={"cand_id": "candidate_id", "ideal_donor": "target"}
-    #                 )
-    #                 logging.info("Data frame {file_path} successfully loaded.")
-    #             if "donation" in file_path:
-    #                 donation_df = pd.read_csv(file_path)
-    #                 donation_df = donation_df.rename(
-    #                     columns={"cand_id": "candidate_id"}
-    #                 )
-    #                 logging.info("Data frame {file_path} successfully loaded.")
-    #             if "feature" in file_path:
-    #                 feature_df = pd.read_csv(file_path)
-    #                 feature_df = feature_df.rename(columns={"cand_id": "candidate_id"})
-    #                 logging.info("Data frame {file_path} successfully loaded.")
-            
-            
-    #         logging.info("Data frames successfully loaded.")
-    #         return label_df, donation_df, feature_df
-
-    #     except Exception as e:
-    #         logging.error(f"Error loading data: {e}")
-    #         return None, None, None
 
     def engineer_features(self):
         """
