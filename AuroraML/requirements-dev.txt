@@ -1,5 +1,0 @@
-jupyter
-ipykernel
-pytest
-flake8
-black
