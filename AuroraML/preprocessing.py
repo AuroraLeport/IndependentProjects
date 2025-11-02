@@ -64,7 +64,6 @@ class DataPreprocessing:
                         self.feature_df = df_temp
                     logging.info(f"Data frame {df_name} successfully loaded from {file_path}.")
                     
-            logging.info("Data frames successfully loaded.")
             return
 
         except Exception as e:
