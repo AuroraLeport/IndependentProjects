@@ -2,7 +2,6 @@ from typing import List, Any
 import pandas as pd
 import numpy as np
 import pickle
-import logging
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import (
@@ -17,9 +16,14 @@ from sklearn.metrics import (
     auc,
 )
 from sklearn.inspection import permutation_importance
-from math import sqrt, exp, log
-from numpy import argmax
+from numpy import argmax, sqrt
 import os
+
+import logging
+
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 class ModelQA:
@@ -87,7 +91,12 @@ class ModelQA:
             logging.error(f"Failed to load artifact from {path}: {e}")
             return {}
 
-    def evaluate_model_performance(self, threshold=0.5, save_plot: bool = True):
+    def evaluate_model_performance(
+        self,
+        threshold=0.5,
+        save_plot: bool = True,
+        display_labels: List[str] = ["True Negative", "True Positive"],
+    ):
         """
         Calculates and displays core classification metrics (AUROC, Precision, Recall, F1)
         and the Confusion Matrix for a specified classification threshold.
@@ -120,7 +129,7 @@ class ModelQA:
             # Plot Confusion Matrix
             cm = confusion_matrix(self.y_validation, y_pred)
             disp = ConfusionMatrixDisplay(
-                confusion_matrix=cm, display_labels=["Not Cheating", "Cheating"]
+                confusion_matrix=cm, display_labels=display_labels
             )
 
             fig, ax = plt.subplots(figsize=(8, 8))
@@ -132,7 +141,7 @@ class ModelQA:
             )
 
             if save_plot:
-                filename = f"cm_thresh_{threshold:.2f}.png"
+                filename = f"confusion_matrix_thresh_{threshold:.2f}.png"
                 full_path = os.path.join(self.output_dir, filename)
                 fig.savefig(full_path, bbox_inches="tight")  # Save the plot
                 logging.info(f"Confusion Matrix saved to {full_path}")
@@ -289,7 +298,9 @@ class ModelQA:
         k_realPOS = self.df_plot["y_true"].sum()  # Total True Positives
 
         if k_realPOS == 0:
-            print("Warning: No positive cases in the test set. Cannot plot lift chart.")
+            logging.info(
+                "Warning: No positive cases in the test set. Cannot plot lift chart."
+            )
             return
 
         # Iteration and Calculation
@@ -374,11 +385,11 @@ class ModelQA:
         ax2.legend(loc="lower right")
 
         if save_plot:
-            filename = "roc_pr_curves.png"
+            filename = "gain_lift_plots.png"
             full_path = os.path.join(self.output_dir, filename)
             plt.savefig(full_path, bbox_inches="tight")
-            logging.info(f"ROC/PR Curves saved to {full_path}")
-            plt.close()  # plt.close() closes the current figure
+            logging.info(f"Lift/Gain Plots saved to {full_path}")
+            plt.close()
         else:
             plt.show()
 
@@ -455,11 +466,11 @@ class ModelQA:
         plt.tight_layout()
 
         if save_plot:
-            filename = "roc_pr_curves.png"
+            filename = "permutation_importance.png"
             full_path = os.path.join(self.output_dir, filename)
             plt.savefig(full_path, bbox_inches="tight")
-            logging.info(f"ROC/PR Curves saved to {full_path}")
-            plt.close()  # plt.close() closes the current figure
+            logging.info(f"Permutation Importance saved to {full_path}")
+            plt.close()
         else:
             plt.show()
 
@@ -531,12 +542,11 @@ class ModelQA:
         plt.tight_layout()
 
         if save_plot:
-            filename = "roc_pr_curves.png"
+            filename = "LR_model_coefficients.png"
             full_path = os.path.join(self.output_dir, filename)
             plt.savefig(full_path, bbox_inches="tight")
-            logging.info(f"ROC/PR Curves saved to {full_path}")
-            plt.close()  # plt.close() closes the current figure
-        else:
+            logging.info(f"LR Model Coefficients saved to {full_path}")
+            plt.close()
             plt.show()
 
     def plot_kde(
@@ -563,28 +573,30 @@ class ModelQA:
         )
 
         if save_plot:
-            filename = "roc_pr_curves.png"
+            filename = "kde_plot.png"
             full_path = os.path.join(self.output_dir, filename)
             plt.savefig(full_path, bbox_inches="tight")
-            logging.info(f"ROC/PR Curves saved to {full_path}")
-            plt.close()  # plt.close() closes the current figure
+            logging.info(f"KDE plot saved to {full_path}")
+            plt.close()
         else:
             plt.show()
 
 
 if __name__ == "__main__":
 
-    artifact_path = "Exp001_20251102_175046_artifact.pkl"
-    qa_lr = ModelQA(
+    artifact_path = (
+        "model_runs/Exp001_20251103_101640/Exp001_20251103_101640_artifact.pkl"
+    )
+    qa_gbc = ModelQA(
         artifact_path=artifact_path,
         # X=X, y=y_true, ID=preprocessed_data['dim_user_id']
     )
 
     # Run your plots instantly without retraining!
-    lift_gain_chart = qa_lr.plot_lift_gain()
-    qa_lr.plot_permutation_importance()
-    qa_lr.plot_model_coefficients()  # should convert the log odds impact back to odds ratio scale by exponentiating it (math.exp(x))
-    qa_lr.plot_aucroc_aucpr()
+    lift_gain_chart = qa_gbc.plot_lift_gain()
+    qa_gbc.plot_permutation_importance()
+    # qa_gbc.plot_model_coefficients()  # should convert the log odds impact back to odds ratio scale by exponentiating it (math.exp(x))
+    qa_gbc.plot_aucroc_aucpr()
 
-    print("--- Logistic Regression Performance ---")
-    lr_metrics = qa_lr.evaluate_model_performance(threshold=0.3848)
+    logging.info("--- Gradient Boosting Classifier Performance ---")
+    gbc_metrics = qa_gbc.evaluate_model_performance(threshold=0.5099)
