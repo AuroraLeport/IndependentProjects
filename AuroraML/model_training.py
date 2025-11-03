@@ -7,28 +7,13 @@ import matplotlib.pyplot as plt
 import logging
 import pickle
 import os
-from numpy import sqrt, argmax
 from typing import List, Any
-from sklearn.inspection import permutation_importance
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import (
     RandomizedSearchCV,
     train_test_split,
     StratifiedKFold,
-)
-
-# New Imports for comprehensive evaluation metrics
-from sklearn.metrics import (
-    precision_score,
-    recall_score,
-    f1_score,
-    roc_auc_score,
-    confusion_matrix,
-    ConfusionMatrixDisplay,
-    auc,
-    roc_curve,
-    precision_recall_curve,
 )
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, FunctionTransformer
 from sklearn.compose import ColumnTransformer
