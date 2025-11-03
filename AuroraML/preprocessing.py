@@ -5,6 +5,7 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 from functools import reduce
 import logging
+import json
 
 # import joblib
 
@@ -235,3 +236,4 @@ if __name__ == "__main__":
     )
 
     print(full_df.columns)
+    print(full_df.shape)
