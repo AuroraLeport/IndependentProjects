@@ -143,7 +143,6 @@ class DataPreprocessing:
             cum_count=("cum_count", "max"),
             #cum_average =("cum_sum", "mean")
         )
-        #print(bucket_agg.head())
 
         # Pivot and Clean
         bucket_agg = bucket_agg.pivot_table(
@@ -154,7 +153,7 @@ class DataPreprocessing:
             fill_value=0,
             observed=True,
         )
-        #print(bucket_agg)
+
         bucket_agg.columns = [
             "_".join(col[::-1]).strip() for col in bucket_agg.columns.values
         ]
@@ -219,9 +218,6 @@ if __name__ == "__main__":
             f"{file_path}/major_donor_labels.csv",
         ]
     )
-    #label_df, donation_df, feature_df = data_preprocessing.load_data()
-    # print(label_df.head())
-    # print(donation_df.sort_values('candidate_id'))
 
     full_df = data_preprocessing.run_preprocessing_pipeline().data
     print(full_df.head())
@@ -237,3 +233,5 @@ if __name__ == "__main__":
             columns
         ].head()
     )
+
+    print(full_df.columns)
