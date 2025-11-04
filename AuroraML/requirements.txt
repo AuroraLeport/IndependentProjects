@@ -1,0 +1,11 @@
+numpy
+pandas
+matplotlib
+scikit-learn
+xgboost==0.90
+seaborn
+hyperopt
+
+# pydantic
+# pytest
+# requests
