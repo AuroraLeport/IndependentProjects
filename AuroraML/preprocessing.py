@@ -30,7 +30,7 @@ class DataPreprocessing:
             self.project_name = project_name
 
         self.data = None
-    
+
     def load_data(self):
         """
         Loads the dataset from specified file paths.
@@ -42,29 +42,43 @@ class DataPreprocessing:
         self.label_df, self.donation_df, self.feature_df = None, None, None
 
         try:
-            data_map = {"label": (lambda df: df.rename(columns={"cand_id": "candidate_id", "ideal_donor": "target"}), "label_df"),
-                        "donation": (lambda df: df.rename(columns={"cand_id": "candidate_id"}), "donation_df"),
-                        "feature": (lambda df: df.rename(columns={"cand_id": "candidate_id"}), "feature_df")
+            data_map = {
+                "label": (
+                    lambda df: df.rename(
+                        columns={"cand_id": "candidate_id", "ideal_donor": "target"}
+                    ),
+                    "label_df",
+                ),
+                "donation": (
+                    lambda df: df.rename(columns={"cand_id": "candidate_id"}),
+                    "donation_df",
+                ),
+                "feature": (
+                    lambda df: df.rename(columns={"cand_id": "candidate_id"}),
+                    "feature_df",
+                ),
             }
-            
+
             for file_path in self.file_paths:
                 key = next((k for k in data_map if k in file_path), None)
-                
+
                 if key:
-                    processor, df_name =  data_map[key]
-                    
+                    processor, df_name = data_map[key]
+
                     # load the data
                     df_temp = pd.read_csv(file_path)
                     df_temp = processor(df_temp)
-                    
+
                     if key == "label":
                         self.label_df = df_temp
-                    elif key == "donation":   
+                    elif key == "donation":
                         self.donation_df = df_temp
                     elif key == "feature":
                         self.feature_df = df_temp
-                    logging.info(f"Data frame {df_name} successfully loaded from {file_path}.")
-                    
+                    logging.info(
+                        f"Data frame {df_name} successfully loaded from {file_path}."
+                    )
+
             return
 
         except Exception as e:
@@ -79,13 +93,17 @@ class DataPreprocessing:
             pd.DataFrame: A DataFrame with all the feature and the target variable.
         """
 
+        self.donation_agg = None
+
         if self.label_df is None or self.donation_df is None or self.feature_df is None:
             logging.info("One or more datasets are None. Cannot engineer features.")
             return None
 
         logging.info("Engineering features...")
         # Keep only donations linked to candidates and their target variable in the label_df
-        self.donation_df = pd.merge(self.label_df, self.donation_df, on="candidate_id", how="left")
+        self.donation_df = pd.merge(
+            self.label_df, self.donation_df, on="candidate_id", how="left"
+        )
 
         # Define range of valid dates and limit donation dates
         self.donation_df["trans_date"] = pd.to_datetime(self.donation_df["trans_date"])
@@ -115,7 +133,10 @@ class DataPreprocessing:
             "donation_p1yr",
         ]
         self.donation_df["time_bucket"] = pd.cut(
-            self.donation_df["days_from_prediction"], bins=bins, labels=labels, ordered=True
+            self.donation_df["days_from_prediction"],
+            bins=bins,
+            labels=labels,
+            ordered=True,
         )
 
         # Calculate backward cumulative sum and count features
@@ -133,7 +154,7 @@ class DataPreprocessing:
         ].cumsum()
 
         # Aggregate fixed window features and get max of cumulative features
-        bucket_agg = self.donation_df.groupby(
+        self.donation_agg = self.donation_df.groupby(
             ["candidate_id", "time_bucket"],
             observed=True,
         ).agg(
@@ -142,25 +163,25 @@ class DataPreprocessing:
             # avg=("amount", "mean"),
             cum_sum=("cum_sum", "max"),
             cum_count=("cum_count", "max"),
-            #cum_average =("cum_sum", "mean")
+            # cum_average =("cum_sum", "mean")
         )
 
         # Pivot and Clean
-        bucket_agg = bucket_agg.pivot_table(
+        self.donation_agg = self.donation_agg.pivot_table(
             index="candidate_id",
             # values=["count", "total", "avg", "cum_sum", "cum_count"],
             values=["cum_sum", "cum_count"],
             columns="time_bucket",
-            fill_value=0,
+            #fill_value=0,
             observed=True,
         )
 
-        bucket_agg.columns = [
-            "_".join(col[::-1]).strip() for col in bucket_agg.columns.values
+        self.donation_agg.columns = [
+            "_".join(col[::-1]).strip() for col in self.donation_agg.columns.values
         ]
-        bucket_agg.reset_index(inplace=True)
+        self.donation_agg.reset_index(inplace=True)
 
-        bucket_agg.drop(
+        self.donation_agg.drop(
             columns=[
                 "donation_p1yr_cum_sum",
                 "donation_p3yr_cum_sum",
@@ -180,25 +201,29 @@ class DataPreprocessing:
             cum_count_col = f"{bucket}_cum_count"
             cum_avg_col = f"{bucket}_cum_avg"
 
-            bucket_agg[cum_avg_col] = (
-                bucket_agg[cum_sum_col].div(bucket_agg[cum_count_col]).fillna(0)
+            self.donation_agg[cum_avg_col] = (
+                self.donation_agg[cum_sum_col]
+                .div(self.donation_agg[cum_count_col])
+                .fillna(0)
             )
 
         # Merge donation to label features
-        bucket_agg.set_index("candidate_id", inplace=True)
+        self.donation_agg.set_index("candidate_id", inplace=True)
         self.label_df.set_index("candidate_id", inplace=True)
         self.feature_df.set_index("candidate_id", inplace=True)
 
-        all_features = bucket_agg.join(self.feature_df, how="left")
+        all_features = self.donation_agg.join(self.feature_df, how="left")
 
-        self.data = self.label_df[["target"]].join(all_features, how="left").reset_index()
+        self.data = (
+            self.label_df[["target"]].join(all_features, how="left").reset_index()
+        )
 
         logging.info("Feature engineering completed.")
 
-        return 
-    
+        return
+
     def run_preprocessing_pipeline(self):
-        
+
         self.load_data()
 
         # Check if loading failed (load_data returns None, None, None on error)
@@ -222,7 +247,7 @@ if __name__ == "__main__":
 
     full_df = data_preprocessing.run_preprocessing_pipeline().data
     print(full_df.head())
-    
+
     columns = [
         "candidate_id",
         "donation_historical_cum_count",
